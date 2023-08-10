@@ -2,7 +2,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Josefin_Sans } from 'next/font/google'
 
-const inter = Josefin_Sans({ subsets: ['latin'] })
+const josefin = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Chatti - Collaborate & Connect',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={josefin.className}>{children}</body>
     </html>
   )
 }
