@@ -7,8 +7,8 @@ interface ChannelListProps {
 
 const ChannelList: React.FC<ChannelListProps> = ({ channels }) => {
   return (
-    <div>
-      {channels?.map((channel) => <div key={channel.id}>{channel.name}</div>)}
+    <div className="bg-dark-red text-off-white px-4 py-2">
+      {channels?.map((channel) => <div className="py-2" key={channel.id}>{channel.name}</div>)}
     </div>
   );
 };

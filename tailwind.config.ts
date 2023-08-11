@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     colors: {
       'red': '#C14953',
+      'dark-red': '#5e2328',
       'off-white': '#E5DCC5',
       'light-gray': '#D3D3D3',
       'mid-gray': '#4C4C47'

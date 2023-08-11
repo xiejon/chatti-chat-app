@@ -26,15 +26,17 @@ const ChatInterface = () => {
     <section className="relative flex flex-col w-full md:w-3/4 lg:w-1/2 bg-light-gray justify-center mt-16 rounded">
       <nav className="flex flex-row w-full bg-red">
         <button
-          className="mx-4 my-2"
+          className="mx-4 my-2 lg:hidden"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <Image src="/menu.svg" alt="menu" height={30} width={30} />
         </button>
-        <div className="ml-2 mt-3 text-off-white">{currentChannel.name}</div>
+        <div className="ml-2 mt-3 text-off-white lg:mx-4 lg:my-3 text-xl text-center">{currentChannel.name}</div>
       </nav>
       <div className="flex">
-        <div>{isMenuOpen && <ChannelList channels={channels} />}</div>
+        <div className={`lg:flex ${isMenuOpen ? 'flex' : 'hidden'} lg:block`}>
+          <ChannelList channels={channels} />
+        </div>
         <MessageContainer messages={messages} />
       </div>
       <div className="flex">
