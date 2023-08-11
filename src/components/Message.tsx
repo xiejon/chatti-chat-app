@@ -1,7 +1,7 @@
 import React from "react";
 import { Message as MessageInterface } from "../interfaces/message";
 import Image from "next/image";
-import { formatDate } from "../utils/dateFormat"; 
+import { formatDate } from "../utils/dateUtil"; 
 
 interface MessageProps {
   message: MessageInterface;
@@ -9,22 +9,21 @@ interface MessageProps {
 }
 
 const Message: React.FC<MessageProps> = ({ message, replies }) => {
-    console.log(message)
   return (
-    <div className="flex">
-      <div>
+    <div className="flex mt-4">
+      <figure>
         <Image src="/avatar.svg" alt="avatar" width={50} height={50} />
-      </div>
-      <div>
+      </figure>
+      <section className="ml-2">
         <div>
-          <div>{message.senderId}</div>
-          <div>{formatDate(message.timestamp)}</div>
+          <strong>{message.senderId}</strong>
+          <time className="ml-2 text-sm">{formatDate(message.timestamp)}</time>
         </div>
-        <div>{message.content}</div>
+        <p>{message.content}</p>
         {replies.map(reply => (
             <Message key={reply.id} message={reply} replies={[]}/>
         ))}
-      </div>
+      </section>
     </div>
   );
 };
