@@ -20,6 +20,10 @@ const Message: React.FC<MessageProps> = ({ message, replies }) => {
           <div>{message.senderId}</div>
           <div>{formatDate(message.timestamp)}</div>
         </div>
+        <div>{message.content}</div>
+        {replies.map(reply => (
+            <Message key={reply.id} message={reply} replies={[]}/>
+        ))}
       </div>
     </div>
   );
