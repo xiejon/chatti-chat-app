@@ -6,7 +6,7 @@ import { Message } from "../interfaces/message";
 import { messages as sampleMessages } from "../data/messages"
 import { channels as sampleChannels } from "../data/channels";
 import ChannelList from "./ChannelList";
-import MessageBox from "./MessageBox";
+import MessageContainer from "./MessageContainer";
 import Image from "next/image";
 
 const ChatInterface = () => {
@@ -24,7 +24,7 @@ const ChatInterface = () => {
           <Image src="/menu.svg" alt="menu" height={30} width={30} />
         </button>
         <div>{isMenuOpen && <ChannelList channels={channels} />}</div>
-        <MessageBox />
+        <MessageContainer messages={messages}/>
       </div>
     </section>
   );
