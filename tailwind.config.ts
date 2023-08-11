@@ -10,6 +10,7 @@ const config: Config = {
     colors: {
       'red': '#C14953',
       'off-white': '#E5DCC5',
+      'light-gray': '#D3D3D3',
       'mid-gray': '#4C4C47'
     }
   },
