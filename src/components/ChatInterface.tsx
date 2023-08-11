@@ -2,14 +2,16 @@
 
 import React, { useState } from "react";
 import { Channel } from "../interfaces/channel";
-import ChannelList from "./ChannelList";
+import { Message } from "../interfaces/message";
+import { messages as sampleMessages } from "../data/messages"
 import { channels as sampleChannels } from "../data/channels";
+import ChannelList from "./ChannelList";
 import MessageBox from "./MessageBox";
 import Image from "next/image";
 
 const ChatInterface = () => {
   const [channels, setChannels] = useState<Channel[]>(sampleChannels);
-  //   const [messages, setMessages] = useState<Message[]>(sampleMessages);
+  const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
   return (
