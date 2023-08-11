@@ -43,7 +43,7 @@ const ChatInterface = () => {
           <MessageContainer messages={messages} />
           <div className="flex flex-row">
             <input
-              className="flex-grow rounded p-2"
+              className="flex-grow px-4 py-2 focus:outline-dark-red"
               type="text"
               placeholder="Type your message..."
               value={inputMessage}
@@ -51,7 +51,7 @@ const ChatInterface = () => {
             ></input>
             <button
               onClick={handleSendMessage}
-              className="p-2 rounded bg-red text-white"
+              className="p-2 bg-red text-white"
             >
               <Image src="/send.svg" alt="send" height={30} width={30} />
             </button>

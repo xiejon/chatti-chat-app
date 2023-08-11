@@ -2,6 +2,7 @@ import React from "react";
 import { Message as MessageInterface } from "../interfaces/message";
 import Image from "next/image";
 import { formatDate } from "../utils/dateUtil"; 
+import { getUsername } from "../utils/userUtil";
 
 interface MessageProps {
   message: MessageInterface;
@@ -9,6 +10,7 @@ interface MessageProps {
 }
 
 const Message: React.FC<MessageProps> = ({ message, replies }) => {
+
   return (
     <div className="flex mt-4">
       <figure>
@@ -16,7 +18,7 @@ const Message: React.FC<MessageProps> = ({ message, replies }) => {
       </figure>
       <section className="ml-2">
         <div>
-          <strong>{message.senderId}</strong>
+          <strong>{getUsername(message.senderId)}</strong>
           <time className="ml-2 text-sm">{formatDate(message.timestamp)}</time>
         </div>
         <p>{message.content}</p>
