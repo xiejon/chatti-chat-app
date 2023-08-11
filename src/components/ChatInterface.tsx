@@ -31,25 +31,32 @@ const ChatInterface = () => {
         >
           <Image src="/menu.svg" alt="menu" height={30} width={30} />
         </button>
-        <div className="ml-2 mt-3 text-off-white lg:mx-4 lg:my-3 text-xl text-center">{currentChannel.name}</div>
+        <div className="ml-2 mt-3 text-off-white lg:mx-4 lg:my-3 text-xl text-center">
+          {currentChannel.name}
+        </div>
       </nav>
       <div className="flex">
-        <div className={`lg:flex ${isMenuOpen ? 'flex' : 'hidden'} lg:block`}>
+        <div className={`lg:flex ${isMenuOpen ? "flex" : "hidden"} lg:block`}>
           <ChannelList channels={channels} />
         </div>
-        <MessageContainer messages={messages} />
-      </div>
-      <div className="flex">
-        <input
-          className="flex-grow rounded p-2"
-          type="text"
-          placeholder="Type your message..."
-          value={inputMessage}
-          onChange={(e) => setInputMessage(e.target.value)}
-        ></input>
-        <button onClick={handleSendMessage} className="p-2 rounded bg-red text-white">
-          <Image src="/send.svg" alt="send" height={30} width={30} />
-        </button>
+        <div className="flex flex-col w-full">
+          <MessageContainer messages={messages} />
+          <div className="flex flex-row">
+            <input
+              className="flex-grow rounded p-2"
+              type="text"
+              placeholder="Type your message..."
+              value={inputMessage}
+              onChange={(e) => setInputMessage(e.target.value)}
+            ></input>
+            <button
+              onClick={handleSendMessage}
+              className="p-2 rounded bg-red text-white"
+            >
+              <Image src="/send.svg" alt="send" height={30} width={30} />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );
