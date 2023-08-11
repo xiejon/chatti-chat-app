@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react";
+import { Channel } from "../interfaces/channel";
 
-const ChannelList = () => {
-  return (
-    <div>ChannelList</div>
-  )
+interface ChannelListProps {
+  channels: Channel[];
 }
 
-export default ChannelList
+const ChannelList: React.FC<ChannelListProps> = ({ channels }) => {
+  return (
+    <div>
+      {channels?.map((channel) => <div key={channel.id}>{channel.name}</div>)}
+    </div>
+  );
+};
+
+export default ChannelList;
