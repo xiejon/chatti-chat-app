@@ -7,6 +7,6 @@ export const channels: Channel[] = [
   },
   {
     id: "2",
-    name: "SF Bay Climbers",
+    name: "Surfers in SF",
   },
 ];

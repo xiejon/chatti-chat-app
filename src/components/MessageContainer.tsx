@@ -14,7 +14,7 @@ const MessageContainer: React.FC<MessageContainerProps> = ({ messages }) => {
   };
 
   return (
-    <div>
+    <div className="mx-4 mb-4">
       {messages.map((msg) => (
         <Message key={msg.id} message={msg} replies={getReplies(msg.id)} />
       ))}
