@@ -8,11 +8,9 @@ import { channels as sampleChannels } from "../data/channels";
 import ChannelList from "./ChannelList";
 import MessageContainer from "./MessageContainer";
 import Image from "next/image";
-import { users } from "../data/users";
+import { users as initialUsers } from "../data/users";
 import Modal from "./Modal";
-
-// 
-const CURR_USER = users[0]
+import { User } from "../interfaces/user";
 
 const ChatInterface = () => {
   const [channels, setChannels] = useState<Channel[]>(sampleChannels);
@@ -23,20 +21,39 @@ const ChatInterface = () => {
   const [inputMessage, setInputMessage] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
-  const [userName, setUsername] = useState<string>('')
+  const [users, setUsers] = useState<User[]>(initialUsers)
+  const [currUser, setCurrUser] = useState<User>({id: '', username: ''});
 
   const handleSendMessage = () => {
+    if (inputMessage.trim() === "") return; // Prevent sending empty messages
+
+    const newMessage = {
+      id: (messages.length + 1).toString(),
+      content: inputMessage,
+      senderId: currUser.id,
+      timestamp: new Date(),
+      channelId: currentChannel.id,
+    };
+
+    setMessages((prev) => [...prev, newMessage]);
     setInputMessage("");
   };
 
   const handleSetName = (name) => {
-    setUsername(name);
+    const newId = (users.length + 1).toString();
+    const newUser: User = {
+      id: newId,
+      username: name,
+    };
+
+    setUsers(prev => [...prev, newUser]);
+    setCurrUser(newUser);
     setIsModalOpen(false);
   };
 
   return (
     <section className="relative flex flex-col w-full md:w-3/4 lg:w-1/2 bg-light-gray justify-center mt-16 rounded">
-    {isModalOpen && <Modal onSetName={handleSetName} />}
+      {isModalOpen && <Modal onSetName={handleSetName} />}
       <nav className="flex flex-row w-full bg-red">
         <button
           className="mx-4 my-2 lg:hidden"
@@ -53,7 +70,7 @@ const ChatInterface = () => {
           <ChannelList channels={channels} />
         </div>
         <div className="flex flex-col w-full">
-          <MessageContainer messages={messages} />
+          <MessageContainer messages={messages} users={users}/>
           <div className="flex flex-row">
             <input
               className="flex-grow px-4 py-2 focus:outline-dark-red"
