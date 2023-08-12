@@ -10,6 +10,7 @@ import { users as initialUsers } from "../data/users";
 import Modal from "./Modal";
 import { User } from "../interfaces/user";
 import { State, Action } from "../interfaces/chat";
+import { getUsername } from "../utils/userUtil";
 
 const initialState: State = {
   channels: sampleChannels,
@@ -20,6 +21,7 @@ const initialState: State = {
   isModalOpen: true,
   users: initialUsers,
   currUser: { id: "", username: "" },
+  replyTo: null,
 };
 
 function chatReducer(state: State, action: Action) {
@@ -42,6 +44,12 @@ function chatReducer(state: State, action: Action) {
         ...state,
         messages: [...state.messages, action.payload],
       };
+
+    case "ENTER_REPLY_MODE":
+      return { ...state, replyTo: action.payload };
+
+    case "CANCEL_REPLY_MODE":
+      return { ...state, replyTo: null };
 
     // Set name of user, add to users list, and close modal
     case "SET_NAME":
@@ -75,12 +83,20 @@ const ChatInterface = () => {
       senderId: state.currUser.id,
       timestamp: new Date(),
       channelId: state.currentChannel.id,
+      parentId: state.replyTo ? state.replyTo.messageId : undefined, // Add parentId if it's a reply
     };
 
-    dispatch({ type: "SEND_MESSAGE", payload: newMessage });
+    // If in reply mode, dispatch reply, else send a normal message
+    if (state.replyTo) {
+      dispatch({ type: "REPLY_TO_MESSAGE", payload: newMessage }); 
+    } else {
+      dispatch({ type: "SEND_MESSAGE", payload: newMessage });
+    }
+
+    dispatch({ type: "CANCEL_REPLY_MODE" });
   };
 
-  // Create new user after name is entered in Modal & set as currUser
+  // Create new user after name is entered in Modal, then set as currUser
   const handleSetName = (name) => {
     const newId = (state.users.length + 1).toString();
     const newUser: User = {
@@ -112,12 +128,37 @@ const ChatInterface = () => {
           <ChannelList channels={state.channels} />
         </div>
         <div className="flex flex-col w-full">
-          <MessageContainer messages={state.messages} users={state.users} currUser={state.currUser}/>
+          <MessageContainer
+            messages={state.messages}
+            users={state.users}
+            currUser={state.currUser}
+            onReply={(parentId, userId) =>
+              dispatch({
+                type: "ENTER_REPLY_MODE",
+                payload: { messageId: parentId, userId },
+              })
+            }
+          />
           <form className="flex flex-row" onSubmit={handleSendMessage}>
+            {state.replyTo && (
+              <button
+                className="bg-red p-2 text-off-white"
+                onClick={() => dispatch({ type: "CANCEL_REPLY_MODE" })}
+              >
+                Cancel Reply
+              </button>
+            )}
             <input
               className="flex-grow px-4 py-2 focus:outline-dark-red"
               type="text"
-              placeholder="Type your message..."
+              placeholder={
+                state.replyTo
+                  ? `Replying to ${getUsername(
+                      state.replyTo.userId,
+                      state.users
+                    )}...` // "Replying to Jane Doe..."
+                  : "Type your message..."
+              }
               value={state.inputMessage}
               onChange={(e) =>
                 dispatch({ type: "SET_INPUT_MESSAGE", payload: e.target.value })

@@ -10,7 +10,7 @@ interface MessageProps {
   replies: MessageInterface[];
   users: User[];
   currUser: User;
-  onReply: (parentId: string) => void;
+  onReply: (parentId: string, userId: string) => void;
 }
 
 const Message: React.FC<MessageProps> = ({
@@ -21,7 +21,7 @@ const Message: React.FC<MessageProps> = ({
   onReply,
 }) => {
   const handleReplyClick = () => {
-    onReply(message.id);
+    onReply(message.id, message.senderId);
   };
 
   const isCurrentUser = message.senderId === currUser.id;
