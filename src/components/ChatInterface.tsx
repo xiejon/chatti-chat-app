@@ -112,7 +112,7 @@ const ChatInterface = () => {
           <ChannelList channels={state.channels} />
         </div>
         <div className="flex flex-col w-full">
-          <MessageContainer messages={state.messages} users={state.users} />
+          <MessageContainer messages={state.messages} users={state.users} currUser={state.currUser}/>
           <form className="flex flex-row" onSubmit={handleSendMessage}>
             <input
               className="flex-grow px-4 py-2 focus:outline-dark-red"

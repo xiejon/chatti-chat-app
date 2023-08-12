@@ -7,11 +7,13 @@ import { User } from "../interfaces/user";
 interface MessageContainerProps {
   messages: MessageInterface[];
   users: User[];
+  currUser: User;
 }
 
 const MessageContainer: React.FC<MessageContainerProps> = ({
   messages,
   users,
+  currUser
 }) => {
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
 
@@ -27,14 +29,23 @@ const MessageContainer: React.FC<MessageContainerProps> = ({
       .sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime());
   };
 
+  const onReply = () => {
+    console.log('reply')
+  }
+
+  // Filter only the parent messages
+  const parentMessages = messages.filter((msg) => !msg.isReply);
+
   return (
     <div className="mx-4 mb-4 h-[400px] md:h-[500px] overflow-scroll">
-      {messages.map((msg) => (
+      {parentMessages.map((msg) => (
         <Message
           key={msg.id}
           message={msg}
           replies={getReplies(msg.id)}
           users={users}
+          currUser={currUser}
+          onReply={onReply}
         />
       ))}
       <div ref={messagesEndRef} />
