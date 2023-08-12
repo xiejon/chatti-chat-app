@@ -16,5 +16,6 @@ export interface State {
 export type Action =
   | { type: "SET_INPUT_MESSAGE"; payload: string }
   | { type: "SEND_MESSAGE"; payload: Message }
+  | { type: 'REPLY_TO_MESSAGE'; payload: Message }
   | { type: "SET_NAME"; payload: { newUser: User } }
   | { type: "TOGGLE_MENU" };

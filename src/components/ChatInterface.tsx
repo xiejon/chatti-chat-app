@@ -36,6 +36,13 @@ function chatReducer(state: State, action: Action) {
         inputMessage: "",
       };
 
+    // Add reply to a specific message
+    case "REPLY_TO_MESSAGE":
+      return {
+        ...state,
+        messages: [...state.messages, action.payload],
+      };
+
     // Set name of user, add to users list, and close modal
     case "SET_NAME":
       return {
@@ -58,7 +65,7 @@ const ChatInterface = () => {
   const [state, dispatch] = useReducer(chatReducer, initialState);
 
   const handleSendMessage = () => {
-    if (state.inputMessage.trim() === "") return; // Prevent sending empty messages
+    if (state.inputMessage.trim() === "") return; // Return if input is empty
 
     const newMessage = {
       id: (state.messages.length + 1).toString(),

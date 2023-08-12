@@ -9,9 +9,20 @@ interface MessageProps {
   message: MessageInterface;
   replies: MessageInterface[];
   users: User[];
+  onReply: (parentId: string) => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, replies, users }) => {
+const Message: React.FC<MessageProps> = ({
+  message,
+  replies,
+  users,
+  onReply,
+}) => {
+
+  const handleReplyClick = () => {
+    onReply(message.id);
+  };
+
   return (
     <div className="flex mt-4">
       <figure>
@@ -24,8 +35,21 @@ const Message: React.FC<MessageProps> = ({ message, replies, users }) => {
         </div>
         <p>{message.content}</p>
         {replies.map((reply) => (
-          <Message key={reply.id} message={reply} replies={[]} users={users} />
+          <Message
+            key={reply.id}
+            message={reply}
+            replies={[]}
+            users={users}
+            onReply={onReply}
+          />
         ))}
+        {!message.isReply && (
+          <button
+            onClick={handleReplyClick}
+          >
+            <Image src="/corner-down-right.svg" alt="reply" width={20} height={20} />
+          </button>
+        )}
       </section>
     </div>
   );
