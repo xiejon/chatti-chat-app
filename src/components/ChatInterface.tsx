@@ -64,7 +64,9 @@ function chatReducer(state: State, action: Action) {
 const ChatInterface = () => {
   const [state, dispatch] = useReducer(chatReducer, initialState);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = (e) => {
+    e.preventDefault();
+
     if (state.inputMessage.trim() === "") return; // Return if input is empty
 
     const newMessage = {
@@ -111,7 +113,7 @@ const ChatInterface = () => {
         </div>
         <div className="flex flex-col w-full">
           <MessageContainer messages={state.messages} users={state.users} />
-          <div className="flex flex-row">
+          <form className="flex flex-row" onSubmit={handleSendMessage}>
             <input
               className="flex-grow px-4 py-2 focus:outline-dark-red"
               type="text"
@@ -121,13 +123,10 @@ const ChatInterface = () => {
                 dispatch({ type: "SET_INPUT_MESSAGE", payload: e.target.value })
               }
             ></input>
-            <button
-              onClick={handleSendMessage}
-              className="p-2 bg-red text-white"
-            >
+            <button className="p-2 bg-red text-white" type="submit">
               <Image src="/send.svg" alt="send" height={30} width={30} />
             </button>
-          </div>
+          </form>
         </div>
       </div>
     </section>

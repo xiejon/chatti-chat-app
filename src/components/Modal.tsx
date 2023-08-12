@@ -8,13 +8,14 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onSetName }) => {
   const [name, setName] = useState("");
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     onSetName(name);
   };
 
   return (
     <div className="absolute w-full h-full flex z-50 bg-red justify-center items-center">
-      <div className="p-4 flex flex-col">
+      <form className="p-4 flex flex-col" onSubmit={handleSubmit}>
         <label htmlFor="name" className="text-off-white">
           Enter Your Name:
         </label>
@@ -27,11 +28,11 @@ const Modal: React.FC<ModalProps> = ({ onSetName }) => {
         />
         <button
           className="px-4 py-2 rounded bg-dark-red text-off-white text-xl mt-4"
-          onClick={handleSubmit}
+          type="submit"
         >
           Start Chatting
         </button>
-      </div>
+      </form>
     </div>
   );
 };
