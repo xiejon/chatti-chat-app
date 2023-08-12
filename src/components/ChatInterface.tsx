@@ -42,7 +42,9 @@ function chatReducer(state: State, action: Action) {
     case "REPLY_TO_MESSAGE":
       return {
         ...state,
-        messages: [...state.messages, action.payload],
+        messages: [...state.messages, {...action.payload, isReply: true}],
+        inputMessage: "",
+        replyTo: null
       };
 
     case "ENTER_REPLY_MODE":
@@ -85,6 +87,8 @@ const ChatInterface = () => {
       channelId: state.currentChannel.id,
       parentId: state.replyTo ? state.replyTo.messageId : undefined, // Add parentId if it's a reply
     };
+
+    console.log(state.replyTo)
 
     // If in reply mode, dispatch reply, else send a normal message
     if (state.replyTo) {
