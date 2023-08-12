@@ -8,6 +8,11 @@ import { channels as sampleChannels } from "../data/channels";
 import ChannelList from "./ChannelList";
 import MessageContainer from "./MessageContainer";
 import Image from "next/image";
+import { users } from "../data/users";
+import Modal from "./Modal";
+
+// 
+const CURR_USER = users[0]
 
 const ChatInterface = () => {
   const [channels, setChannels] = useState<Channel[]>(sampleChannels);
@@ -17,13 +22,21 @@ const ChatInterface = () => {
   const [messages, setMessages] = useState<Message[]>(sampleMessages);
   const [inputMessage, setInputMessage] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const [userName, setUsername] = useState<string>('')
 
   const handleSendMessage = () => {
     setInputMessage("");
   };
 
+  const handleSetName = (name) => {
+    setUsername(name);
+    setIsModalOpen(false);
+  };
+
   return (
     <section className="relative flex flex-col w-full md:w-3/4 lg:w-1/2 bg-light-gray justify-center mt-16 rounded">
+    {isModalOpen && <Modal onSetName={handleSetName} />}
       <nav className="flex flex-row w-full bg-red">
         <button
           className="mx-4 my-2 lg:hidden"
