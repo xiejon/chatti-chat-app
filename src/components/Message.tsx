@@ -24,19 +24,20 @@ const Message: React.FC<MessageProps> = ({
     onReply(message.id, message.senderId);
   };
 
-  const isCurrentUser = message.senderId === currUser.id;
+  // Align right if message is from currUser and is not a reply
+  const alignRight = message.senderId === currUser.id && !message.isReply
 
   return (
-    <div className={`flex mt-4 ${isCurrentUser ? 'flex-row-reverse' : ''}`}>
+    <div className={`flex mt-4 ${alignRight? 'flex-row-reverse' : ''}`}>
         <figure className="">
         <Image src="/avatar.svg" alt="avatar" width={50} height={50} />
       </figure>
-      <section className={`ml-2 ${isCurrentUser ? 'text-right mr-2' : ''}`}>
+      <section className={`ml-2 ${alignRight ? 'text-right mr-2' : ''}`}>
         <div>
           <strong>{getUsername(message.senderId, users)}</strong>
           <time className="ml-2 text-sm">{formatDate(message.timestamp)}</time>
         </div>
-        <p className={`${isCurrentUser ? 'bg-blue-200' : ''}`}>{message.content}</p>
+        <p>{message.content}</p>
         {replies.map((reply) => (
           <Message
             key={reply.id}
