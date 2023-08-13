@@ -3,7 +3,7 @@ import { Message } from "./message";
 import { User } from "./user";
 
 interface ReplyTo {
-  messageId: string; 
+  messageId: string;
   userId: string;
 }
 
@@ -20,10 +20,11 @@ export interface State {
 }
 
 export type Action =
-| { type: "SET_INPUT_MESSAGE"; payload: string }
-| { type: "SEND_MESSAGE"; payload: Message }
-| { type: "REPLY_TO_MESSAGE"; payload: Message }
-| { type: "ENTER_REPLY_MODE"; payload: ReplyTo }
-| { type: "CANCEL_REPLY_MODE" }
-| { type: "SET_NAME"; payload: { newUser: User } }
-| { type: "TOGGLE_MENU" };
+  | { type: "SET_INPUT_MESSAGE"; payload: string }
+  | { type: "SEND_MESSAGE"; payload: Message }
+  | { type: "REPLY_TO_MESSAGE"; payload: Message }
+  | { type: "ENTER_REPLY_MODE"; payload: ReplyTo }
+  | { type: "CANCEL_REPLY_MODE" }
+  | { type: "SET_NAME"; payload: { newUser: User } }
+  | { type: "TOGGLE_MENU" }
+  | { type: "SET_CHANNEL"; payload: Channel };

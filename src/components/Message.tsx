@@ -1,9 +1,9 @@
 import React from "react";
-import { Message as MessageInterface } from "../interfaces/message";
 import Image from "next/image";
+import { Message as MessageInterface } from "../interfaces/message";
+import { User } from "../interfaces/user";
 import { formatDate } from "../utils/dateUtil";
 import { getUsername } from "../utils/userUtil";
-import { User } from "../interfaces/user";
 
 interface MessageProps {
   message: MessageInterface;
@@ -32,9 +32,19 @@ const Message: React.FC<MessageProps> = ({
   return (
     <div className={`flex mt-4 ${alignRight ? "flex-row-reverse" : ""}`}>
       <figure className="min-w-[25px]">
-        <Image className="w-[25px] md:w-[50px]" src="/avatar.svg" alt="avatar" width={50} height={50} />
+        <Image
+          className="w-[25px] md:w-[50px]"
+          src="/avatar.svg"
+          alt="avatar"
+          width={50}
+          height={50}
+        />
       </figure>
-      <section className={`ml-2 ${alignRight ? "text-right mr-2" : ""} ${isCurrUser ? "mr-4" : ""}`}>
+      <section
+        className={`ml-2 ${alignRight ? "text-right mr-2" : ""} ${
+          isCurrUser ? "mr-4" : ""
+        }`}
+      >
         <div>
           <strong>{getUsername(message.senderId, users)}</strong>
           <time className="ml-2 text-sm">{formatDate(message.timestamp)}</time>

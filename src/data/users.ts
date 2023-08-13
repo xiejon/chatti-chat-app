@@ -1,12 +1,13 @@
 import { User } from "../interfaces/user";
 
+// Sample users
 export const users: User[] = [
     {
         id: '1',
-        username: 'John Parker'
+        username: 'Elvis P.'
     },
     {
         id: '2', 
-        username: 'Jane Doe'
+        username: 'Taylor S.'
     }
 ]

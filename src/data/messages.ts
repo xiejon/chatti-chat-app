@@ -1,5 +1,6 @@
 import { Message } from "../interfaces/message";
 
+// Sample messages
 export const messages: Message[] = [
   {
     id: "1",
@@ -16,5 +17,12 @@ export const messages: Message[] = [
     channelId: "1",
     isReply: true,
     parentId: "1",
+  },
+  {
+    id: "3",
+    content: "Surf this weekend anyone? 🏄‍♀️",
+    senderId: "1",
+    timestamp: new Date("2023-08-10T08:06:00Z"),
+    channelId: "2",
   },
 ];

@@ -1,12 +1,11 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
 interface ModalProps {
   onSetName: (name: string) => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ onSetName }) => {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
 
   const handleSubmit = (e) => {
     e.preventDefault();

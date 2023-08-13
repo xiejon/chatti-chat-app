@@ -1,9 +1,9 @@
 import React from 'react'
 
-const Navbar = () => {
+const Header = () => {
   return (
     <h1 className='text-6xl text-red'>chatti</h1>
   )
 }
 
-export default Navbar
+export default Header

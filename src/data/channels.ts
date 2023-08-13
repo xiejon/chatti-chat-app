@@ -1,5 +1,6 @@
 import { Channel } from '../interfaces/channel';
 
+// Sample channels
 export const channels: Channel[] = [
   {
     id: "1",

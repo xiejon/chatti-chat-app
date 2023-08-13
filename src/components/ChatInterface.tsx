@@ -1,17 +1,17 @@
 "use client";
 
 import React, { useReducer } from "react";
-import { messages as sampleMessages } from "../data/messages";
-import { channels as sampleChannels } from "../data/channels";
+import Image from "next/image";
 import ChannelList from "./ChannelList";
 import MessageContainer from "./MessageContainer";
-import Image from "next/image";
-import { users as initialUsers } from "../data/users";
 import Modal from "./Modal";
 import { User } from "../interfaces/user";
-import { State, Action } from "../interfaces/chat";
-import { getUsername } from "../utils/userUtil";
 import { Channel } from "../interfaces/channel";
+import { State, Action } from "../interfaces/chat";
+import { messages as sampleMessages } from "../data/messages";
+import { channels as sampleChannels } from "../data/channels";
+import { users as initialUsers } from "../data/users";
+import { getUsername } from "../utils/userUtil";
 
 const initialState: State = {
   channels: sampleChannels,
@@ -67,11 +67,12 @@ function chatReducer(state: State, action: Action) {
     case "TOGGLE_MENU":
       return { ...state, isMenuOpen: !state.isMenuOpen };
 
+    // Set chat channel
     case "SET_CHANNEL":
       return {
         ...state,
-        currentChannel: action.payload
-      }
+        currentChannel: action.payload,
+      };
 
     default:
       return state;
@@ -116,10 +117,10 @@ const ChatInterface = () => {
   };
 
   const handleChannelClick = (channel: Channel) => {
-    dispatch({ type: "SET_CHANNEL", payload: channel})
-  }
+    dispatch({ type: "SET_CHANNEL", payload: channel });
+  };
 
-  // Filter messages based on the current channel
+  // Filter messages based on current channel
   const channelMessages = state.messages.filter(
     (message) => message.channelId === state.currentChannel.id
   );
@@ -142,7 +143,10 @@ const ChatInterface = () => {
         <div
           className={`lg:flex ${state.isMenuOpen ? "flex" : "hidden"} lg:block`}
         >
-          <ChannelList channels={state.channels} onChannelClick={handleChannelClick}/>
+          <ChannelList
+            channels={state.channels}
+            onChannelClick={handleChannelClick}
+          />
         </div>
         <div className="flex flex-col w-full">
           <MessageContainer
