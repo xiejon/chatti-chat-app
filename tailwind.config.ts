@@ -11,7 +11,7 @@ const config: Config = {
       'red': '#C14953',
       'dark-red': '#5e2328',
       'off-white': '#E5DCC5',
-      'light-gray': '#D3D3D3',
+      'light-gray': '#FCE4D6',
       'mid-gray': '#4C4C47'
     }
   },
