@@ -25,13 +25,14 @@ const Message: React.FC<MessageProps> = ({
   };
 
   const isCurrUser = message.senderId === currUser.id;
+
   // Align right if message is from currUser and is not a reply
   const alignRight = isCurrUser && !message.isReply;
 
   return (
     <div className={`flex mt-4 ${alignRight ? "flex-row-reverse" : ""}`}>
-      <figure className="">
-        <Image src="/avatar.svg" alt="avatar" width={50} height={50} />
+      <figure className="min-w-[25px]">
+        <Image className="w-[25px] md:w-[50px]" src="/avatar.svg" alt="avatar" width={50} height={50} />
       </figure>
       <section className={`ml-2 ${alignRight ? "text-right mr-2" : ""} ${isCurrUser ? "mr-4" : ""}`}>
         <div>
