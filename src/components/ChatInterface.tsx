@@ -42,9 +42,9 @@ function chatReducer(state: State, action: Action) {
     case "REPLY_TO_MESSAGE":
       return {
         ...state,
-        messages: [...state.messages, {...action.payload, isReply: true}],
+        messages: [...state.messages, { ...action.payload, isReply: true }],
         inputMessage: "",
-        replyTo: null
+        replyTo: null,
       };
 
     case "ENTER_REPLY_MODE":
@@ -76,7 +76,6 @@ const ChatInterface = () => {
 
   const handleSendMessage = (e) => {
     e.preventDefault();
-
     if (state.inputMessage.trim() === "") return; // Return if input is empty
 
     const newMessage = {
@@ -88,11 +87,9 @@ const ChatInterface = () => {
       parentId: state.replyTo ? state.replyTo.messageId : undefined, // Add parentId if it's a reply
     };
 
-    console.log(state.replyTo)
-
     // If in reply mode, dispatch reply, else send a normal message
     if (state.replyTo) {
-      dispatch({ type: "REPLY_TO_MESSAGE", payload: newMessage }); 
+      dispatch({ type: "REPLY_TO_MESSAGE", payload: newMessage });
     } else {
       dispatch({ type: "SEND_MESSAGE", payload: newMessage });
     }
@@ -146,6 +143,7 @@ const ChatInterface = () => {
           <form className="flex flex-row" onSubmit={handleSendMessage}>
             {state.replyTo && (
               <button
+                type="button"
                 className="bg-red p-2 text-off-white"
                 onClick={() => dispatch({ type: "CANCEL_REPLY_MODE" })}
               >
