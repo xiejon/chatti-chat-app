@@ -7,7 +7,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ onSetName }) => {
   const [name, setName] = useState<string>("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSetName(name);
   };

@@ -82,7 +82,7 @@ function chatReducer(state: State, action: Action) {
 const ChatInterface = () => {
   const [state, dispatch] = useReducer(chatReducer, initialState);
 
-  const handleSendMessage = (e) => {
+  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (state.inputMessage.trim() === "") return; // Return if input is empty
 
