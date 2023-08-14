@@ -30,7 +30,7 @@ const Message: React.FC<MessageProps> = ({
   const alignRight = isCurrUser && !message.isReply;
 
   return (
-    <div className={`flex mt-4 ${alignRight ? "flex-row-reverse" : ""}`}>
+    <div data-testid="message" className={`flex mt-4 ${alignRight ? "flex-row-reverse" : ""}`}>
       <figure className="min-w-[25px]">
         <Image
           className="w-[25px] md:w-[50px]"
