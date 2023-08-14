@@ -88,3 +88,6 @@ The limited time & scope meant that there were many features left out that I wou
 
 **UX**
 - Users should have unique avatars, assuming they've uploaded one. User actions should provide immediate feedback (i.e. a button hover effect or a loading spinner). More consideration could be put into improving responsiveness, for example, replying to a thread on mobile is currently clunky. Scrolling on mobile may also be an issue. 
+
+**State Management**
+- Currently, state is managed within parent components (primarily in ChatInterface.tsx) and passed via props. As the app grows, this will cause bloat since props need to be passed down through each child to reach deeply nested components. For example, we are passing the currUser state from ChatInterface.tsx all the way to the leaf component, Message.tsx. An improvement would be to use a state management library like Redux Toolkit to allow distant parts of the app to have access to the same state.
