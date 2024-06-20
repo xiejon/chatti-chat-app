@@ -1,5 +1,3 @@
-This is my submission for the Typeface Frontend Coding Assessment: 
-
 **Chatti** - a chat app built in NextJS/TS/React
 
 (Jonathan Xie, August 13th 2023)
